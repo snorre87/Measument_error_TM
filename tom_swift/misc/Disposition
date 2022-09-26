@@ -1,0 +1,375 @@
+Disposition
+
+Themes
+	Unvalidated Validation Methods
+		- Top words + docs misrepresents, overlooks and has high variance in relation to multimodality.
+
+
+
+	Granularity (substantive fit)
+		- Inefficiency of the validation technique, since top 10 will account for much less of the whole topic. 
+			
+			Allowing Noise.
+
+
+	Bad assumptions about the behavior of topic models.	
+		- Generic words are scattered randomly accross topics.
+		- Noise is conglomerated into noise topics. 
+
+		- Alpha parameter can just be 1/k.
+		- K is not that important. 	
+
+	Validation from computer science is INformation Retrieval Validation
+		- Optimizing Trust and the users Quality Assesment / evaluations. 
+			-- Automatic Intrusion measures are based on the top words, and not the topic as a whole.
+		- Optimizing difference.
+
+
+Following a recent study addressing the variance introduced by preprocessing scheme, we investigate the variance introduced as a result of model instability and validation procedures. 
+
+
+
+Abstract - Model selection and Validation
+	In this paper we show that current criteria for labeling, validating and selecting topic models include arbitrary judgements and that they lead to nontrivial measurement errors. 
+	Labeling of topics and model choice relies on three unwarranted assumptions 1) semantic coherence between the most predictive documents within topic cluster and the rest of the documents 2) insignificant variation between topic models classified as the same topic 3) explicit performance measures are not necessary. 
+
+	
+
+	With the digitization of information and social interactions, text data is playing an increasingly important role in social scientific enquiry. As one of the most widely used methods, topic models - variations of the Latent Dirichlet Allocation model - have become the de facto standard for automated text analysis within the social sciences. Topic models provide a flexible framework for discovering latent structures in a collection of text. Although originally designed as a dimensionality reduction technique used as input to supervised classification or for recommendation systems and topical search, social scientists has appropriated the method for automated content analysis covering both grounded discovery of categories and automated classification. 
+	Although widely used topic models are known to suffer many problems including including high multimodality in the inferred structure, and lacking justification for the choice of bayesian priors as well as the number of topics. Even with these known deficiencies, current state-of-the-art involves no explicit evaluation of the semantic validity of the classifications made by the method. Instead researchers rely on biased representations when labeling topics, indirect validation schemes and ad hoc heuristics for model selection. 
+	In this paper, we make the simple case that when topic modelling is used for classification, it should be treated and evaluated as a measurement device and not as an unsupervised search heuristic. We focus directly on the consequences of current practice to the validity of both measurement and research conclusions.
+	By analyzing a distribution of equally plausible model choices and topic interpretations, we show how variations in the solutions produce widely different results and high levels of differential bias. We end with a discussion on the potential remedies: direct validation and bias correction, robustness using multiple models, and efficient supervised learning alternatives. 
+	
+
+
+Potential Reviewers
+	Christopher Bail
+	James Evans
+	Dan McFarland	
+	Laura Nelson
+	Gary King
+	
+	Ken Benoit
+	
+	Justin Grimmer
+
+
+
+
+Ressource for THe formula:
+	https://stats.stackexchange.com/questions/292281/clustering-with-latent-dirichlet-allocation-lda-distance-measure
+
+	text: P(z_i=j \mid \textbf{z}_{-i} , \textbf{w} ) \propto \frac{n^{(w_i)}_{-i,j}+\beta}{n^{(.)}_{-i,j}+W\beta} \times \frac{n^{(d_i)}_{-i,j}+\alpha}{n^{(d_i)}_{-i,.}+T\alpha}
+
+	P(z_i=j \mid \textbf{z}_{-i} , \textbf{w} )
+
+"It is used a measurement device. "
+Structure:
+	
+
+	INTRO
+		- Intro to topic models. - "Topic models is a form of clustering", "Topic models are widely used."
+			The amount of textual data available to social scientists have exploded in recent decades and has led to the development of more and less automated methods that can extract different features from texts. Topic models have played a particularly important role in many branches of the social sciences including cultural sociology (Mohr and Boganov 2013), political science (Grimmer and Stuart 2013) and has recently seen an introduction to economy (Gentzkow et al. 2017; Hansen et al. 2018).
+			Topic modelling is widely used as a clustering technique (footnote: At least it is used as a clustering technique, even if it has no conception of similarity, nor is optimized directly to minimize intra-cluster distance nor maximize inter-cluster distance.) for high dimensional and sparse data, and in particular text data. It was developed in the field of information retrieval as an efficient way of uncovering latent groupings of both words and documents in large textual databases, empowering especially topic based search and document retrieval (Blei 2012). Since its inception with the seminal paper introducing "Latent Dirichlet Allocation", it has been adopted by many fields hereunder the social sciences (Ramage et al. 2009; Grimmer and Stewart 2013; DiMaggio 2015; Evans and Aveces 2016), and the original paper receiving more than 25.000 citations. 
+			The whole family of graphical probabilistic models, termed topic models, represents both documents and words as a mixture of latent topics, and a topic as a distribution over word probabilities, and has been praised for being inductive, datadriven, and for its ability to represent the polysemi of words and multiplicity / heteroglossia of documents. The method have been used to analyze the distorting effects of electoral incentives on Congressional representation (Grimmer, 2013); the dynamics of democratic agenda setting in Congress speeches (Quinn et al., 2010); the substantive traits of trade bills that were lobbied and those that were not (Kim, 2017); the hegemony of a macro-economic framework in the Federal Open Market Committee during and before the financial crisis of 2008 (Fligstein et al. 2017); the political discourse on cryptomarkets (Munksgaard & Demant, 2016) and the cultural carrying capacities of NGO’s in their political communication (Bail, 2016). The latent dimensions discovered using the method has been interpreted as topics, themes, frames and discourses and the rich array of empirical applications of topic models demonstrate the need and usefulness of automated text analysis. 
+
+		- Appropriation of Topic models for measurement: "Discovery and Measurement has very different methodological implications, and the requirements of the latter has not been sufficiently addressed."	
+			Many introductory papers (Grimmer and Stuart 2013; Evans and ..) attenuate the original application of topic models, i.e. as a heuristic for the discovery of themes and relevant documents in large unstructured textual databases (e.g. Blei and Lafferty 2007; Blei 2012), however its use in sociology and social sciences more broadly has mainly been as a measurement tool for automated content analysis. The model do indeed both discover and estimate the prevalence of each latent topic, however the latter objective has very different and wider methodological implications than the former. Where discovery is about usefullness, measurement is about being unbiased and precise. In this paper we argue that the appropriation of topic models as a measurement device has not been followed by an appropriate development of validation methods. 
+
+		- Trust in an unvalidated measurement device. - "The classification and output of topic models are trusted as meaningful objects" - e.g. substantively meaningful themes called topics"
+			More specifically we investigate the efficacy of the two most used validation techniques: face validity of top words and predictive validity. None of which address the precision and bias of a given classifier directly. Both validation methods assume a general level of trust in both the output of any given topic model as a meaningful object in itself and in turn the researcher's ability to correctly interpret "what the topic is about" from a highly biased (non-random) list of decontextualized words. It is argued that we "move outside our comfort zone in accepting interpretive uncertainty"(DiMaggio 2015: 2), but in this study we investigate of this leap of faith is justified.
+
+		- Reasons for a growing scepticism. - "Besides a general healthy skepticism of any measurement device, there are many reasons to be skeptical."
+			The high level of trust in an unsupervised method (Chuang et al. 2015:1), is a peculiar one, especially bearing in mind that the researcher has many degrees of freedom when specifying the model (how many topics K, and the lesser used but equally important parameter alpha, determining the proportions of each topic), and selecting the final model with reference to substantive interests, qualitative inspections and prefered level of "granularity" (see for example the influential text by DiMaggio et al. 2013; Quinn et al. 2009:x;Farrell 2016:x;Fligstein et al. 2017:x;Nelson 2017). Our current study builds on a growing body of work explicating problematic features of the method: including a high level of multimodality (Lancietti et al. 2014; Chuang et al. 2015, Roberts et al. 2016, Wilkerson and Casas 2017; Gentzkow et al. 2017: 27; Agrawal et al. 2018), high variance in semantic validity (i.e. accuracy, see Krippendorf 2004:328) of topics (Van Atteveldt et al. 2014), no agreed upon intrinsic measure for model selection (Chang et al. 2009; Blei 2012; DiMaggio 2015; Gentzkow et al. 2017: 18; Maier et al. 2018), high sensitivity to preprocessing steps (Denny and Spirling 2018; Schofield et al. 2017), and conglomeration of heterogenous subclusters (Lancietti et al. 2014; Chuang et al. 2013) what is known as socalled fused or junk topics (Chuang et al. 2013), or "hodge-podge" (Wilkerson and Casas 2017) topics in the literature, and finally a general inefficacy of intrinsic measures (topic model diagnostics) in identifying junk topics (Chuang et al. 2013:2). 
+		
+		- Our Goal: "We want to show the flaws and inefficacy of current validation practice"
+			Because the inference algorithm is non-deterministic and the researcher have to choose the hyperparameters, the space of possible solutions is large, and the researcher is faced with the inevitable question: Which model should I choose? Using a simulation design our study address problems in the validation practice and model selection criterias. We demonstrate the inefficacy of current validation practice for avoiding the introduction of serious bias in measurements. We show the large variance in quality it allows, and in turn the consequences this has for the validity of research conclusions, essentially showing that current freedom in model selection give the researcher arbitrary choice of conclusions. 
+			Our study stress the need for more direct validation, alternative strategies measurement after discovery, and for the use of frameworks like Hopkins and King (2010) for bias correction. We also address how recent strategies for overcoming problems with multimodality, using multiple model runs for more robust results, do indeed improve stability and quality of results, but that this is not guaranteed.
+			
+		- Structure of the article: "Article is structured as follows"
+			We start with an introduction to topic modelling as a methodology for automated content analysis, including model selection, labeling and validation of topics as a measurement device. First we show that labeling and validation uses biased summarization heuristics with the unwarrented and problematic assumptions of topical unity and coherence. Secondly we describe how current model selection schemes is only loosely based on quantitative diagnostics of cluster quality, and that the final choice of model refers to subjective concepts of substantive interests, topic interpretability, and preferred level of granularity. And thirdly we account for the lack of direct assessments of semantic validity, and how researchers instead use sparse references to a concept of predictive validity. We argue that although the semantic validity of an unsupervised method is fundamentally undefined, the validity of the substantive label - i.e. what the researcher claim a topic is measuring - is not. We go on to define a measure of semantic validity for evaluating the continous topic assignments instead of categorical assignment, using the topic assignment probabilities to compute a weighed average of the classification errors. 
+			To investigate the consequences of this practice on the validity of research conclusions, we device a automated scheme employing the rules of labeling (identification of topical top words and corresponding top documents, and the filtering of junk topics) and validation (predictive validity). We apply this automated method to a large collection of models generated from multiple runs of the algorithm on the same dataset, a dataset containing the facebook posts of danish polician from 2009-2017. This results in a set labeled topics which are equally plausible choices in relation to current practice. We then evaluate the population of topics to two references: Noise detection and the classifications of validated dictionaries.
+			The noise detection dataset is constructed by introducing english documents into the danish social media dataset. It allows us to investigate just how much noise can be introduced in a topic without being detected in the top words or documents, and the relation this has to the number of topics in the model - i.e. the choice of "granularity".  
+			The other reference dataset is constructed using the classifications of a set of validated dictionary classifiers designed to measure 15 political topics (e.g. Education, Immigration, Foreign Affaris). The dictionary classifiers which contain more than 1.700 systematically curated topical terms, is validated against a stratified sample of 1440 manually annotated documents (intercoder agreement 0.85). The topical terms and classification are furthermore used for the automatic labeling. 
+			We use this reference to show the large variance in performance, the differential bias each topic has accross politicians and time periods, and in turn how this varying performance affect the probability of making the right conclusion asking a range of common research questions. 
+			We end with a discussion of the way forward for automated content analysis: Direct validation, Robustsness using multiple model runs, or unsupervised learning for discovery and other classification methods for measurement.
+
+			
+			- Introduction to interpretation, labeling and model selection. 
+			- Topic modelling as a measurement device.
+			- Introduction to model selection and labeling and validation. 
+			- Review of critical studies and Validations. 
+			- Introduction to our simulation design and analysis of a population of topic model solutions.
+			
+			- Noise intrusion. Inability to ensure quality, and filter out noise.
+			- Consequences of ad hoc model selections and lack of direct validation, including measurement error, differential bias and arbitrary research conclusions.
+			- Discuss the consequences for research practice: validation and robustness at a minimum. 
+
+	THE TOPIC MODEL AS A MEASUREMENT DEVICE
+	"Topic models are used as measurement devices"
+	Following one of the introductions to topic models we learn that:	
+	"With a collection of documents as input, a topic model can produce a set of interpretable “topics” (i.e., groups of words that are associated under a single theme) and assess the strength with which each document exhibits those topics. Topic models enable researchers to code text collections that are too large to code by hand––a topic model will estimate a coding instrument and situate each document within it."(DiMaggio et al. 2013:577) 
+		"The most distinctive feature of topic models is that they provide an automated procedure for coding the content of a corpus of texts (including very large corpora) into a set of substantively meaningful coding categories called “topics.“" (Mohr and Boganov: 546).
+		
+	Topic models simultaneously develop the categorization scheme and automates the expensive annotation. But, it is up to the analyst to interpret what the categories/topics are. Once the researcher convince himself and the reader of an appropriate label for each topic, he can adopt the estimations of topical prevalence in each document as classifications. The objective of our paper is to investigate whether the validation procedures currently used ensure valid classifications.
+	"General workflow of the topic model"
+	Before proceeding it is useful to look at the general workflow of using topic model for automated content analysis. Generally speaking there are 4 steps: 
+	Discovery
+	1) run model(s) with prefered set of parameters (found using either trial and either or statistical heuristics), 
+	2) inspect, interpret and label topics discovered by the model (top words + maybe exemplary documents), 
+	Validation
+	3) validate model and interpretations (exemplary documents, predictive validity, and ideally word intrusion test of topic quality),
+	if satisfied with the usefullness and quality of the topic:
+	Classification / Measurement
+	4) classify documents / measure topic labels using the topic assignments, else repeat the process. (Produce Circular Graphical Figure)
+	5) Describe topic proportions, dynamics, and correlations related to the research project.
+	
+	"Datadriven topic models can be combined with supervised learning"
+	In relation to other approaches to automated content analysis (e.g. supervised learning), topic modelling has been praised for its datadriven and inductive qualities - i.e. step 1 and 2. And it is indeed evident that unsupervised methods (including topic models) hold great potential in the process of developing and discovering more "grounded" categories (Grimmer and Kind 2011; Nelson 2017). However we question the use of unsupervised methods as de facto classifiers, especially when validation of the efficacy of the model as a classifier is lacking. As described in a recent paper by Nelson (2017), unsupervised methods can be used in combination with other methods of classification including supervised learning (see Nelson 2018 for a simple comparison). Indeed we see this approach in one of the early papers on "General purpose computer-assisted clustering and conceptualization" (footnote: The original paper introducing LDA (Blei et al 2003) we see it used as a low-dimensional input to a supervised topic classifier (ibid.:1012)), but in general topic models are used for both discovery and measurement. Before using it as a measurement device, the researcher has to answer the question: What are the topics measuring? In the next section we shall look into the central question of how researchers interpret topics, and in turn validate their interpretations.
+	
+	INTERPRETATION OF THE TOPIC
+	Before the researcher can proceed to step 4 and 5 answering a substantive research question using the topical dynamics, the researcher must determine what the topic *is*. From a statistical point of view, a topic is a probability distribution over all words in the vocabulary. Each word has some probability, p_i, under each topic, and each document has some probability of being generated from a given topic. The interpretation part of topic modeling involves inspecting these distributions to give the topics a substantive label. Furthermore these inspections are central in the quality control and in the decision to accept the model as meaningful or not. As it is practically unfeasible (as well as unintelligle) to inspect the topic loadings of all words in the vocabulary and all documents for each topic and for each model, researchers instead rely on more efficient heuristics for summarizing the topic as well as for choosing which runs of the model to inspect (more on this later). Most common is to summarize each topic with a list of the top n (e.g. 10) most probable words (see fx. table 1 presenting our dictionaries). Other weighing approaches exists with the main objective of filtering uninformative and generic words from more distinct words (e.g. frex, lift, tf-idf), without relying on arbitrary preprocessing decisions like removing sets of stopwords and setting an arbitrary cut-off for excluding highly prevalent (too generic) words. Common to them all is that they are highly *biased* samples from the topic distributions, a concern already expressed in one of the first introductions "Topic Modeling for the Social Sciences" (Ramage et al. 2009): 
+	"Commonly, the top-k most frequent words are used to describe the topic. At its worst, this characterization can mislead the investigator because each topic is a distribution over the full vocabulary. "(ibid.:3)
+	Using this approach rests on the assumption that the topic is *coherent* throughout the distribution, i.e. that the has a "single theme"(DiMaggio et al. 2013:577). As we cover in the next section, the model especially an underspecified model has no such guarantees (e.g. see Nelson 2017:18; AlSumait et al. 2009:67), and in turn we investigate empirically just how much this assumption can mislead the researcher. As decontextualized words can be hard to interpret with certainty, it is also common that the researcher inspects top documents (exemplary documents with a high topic loading) for conceptualization. However, as we shall see in the section on validation methods, the assumption of coherence become even more crucial, because the top words are often the sole evidence presented to readers as to the validity of the interpretations. 
+	
+	-->Reasons to be concerned with indirect validations
+	Topics as conglemerates: JUNK, HODGE-PODGE, FUSED and INTRUSION
+		"LDA produce junk topics"
+		Contrary to the assumption of coherence, topic models are known to often produce low-quality, unintelligeble and uninterpretable topics, found under various terms throughout the litterature as: intrusion (Mimno et al. 2011), junk (Farrel 2016), hodge-podge (Robert et al. 2014; Wilkerson and Casas 2017), or fused (Chuang et al. 2013) topics. The concept is commonly used when disregarding certain topics in the topic model solution one has chosen (e.g. Farrel 2016), and used actively in model choice (see Nelson 2017:18 for a methodological recommendation and e.g. Farrel 2016 appendix: 9 for an applied example). Indeed it is common knowlegde that topics in a misspecified model can be a mixture of more than one distributions, a conglomerate instead of a cluster. Most notably Lancichinetti et al (2014), showed that even when the model is correctly specified in terms of number of topics, k, even entirely unrelated languages will be fused into the same topic, if the unknown proportions are sufficiently unbalanced (depending on strength of co-occurence this collapse happen with proportion ratios as low as 1:5, see appendix). 
+				They go on to propose a model that cluster the co-occurence graph directly (footnote: as opposed to the inference method where there are dependencies based on co-occurence, but also from shared topic membership which is also a result of random initialization. See appendix for more detailed discussion.), borrowing a method from the field of network clustering (Rossval 2009).
+				They even showed that the fused solution will "have a better likelihood than the true generative model"(Lancichinetti et al 2014:8). 
+				Have to increase K, to detect and resolve smaller topics. "standard algorithms will require one to assume that there is an unrealistically large number of topics giving rise to the corpus because “extra topics” are needed in order to “resolve” topics with small fractions of documents."(Lancichinetti et al 2014:4). 
+		"Finding the right solution is not neccesarily possible."
+		Chuang et al. (2013) similarly investigated the problem of fused topics, essentially showing that even after an extremely large search for the right parameters (both K and the rarely used but equally important alpha parameter, amounting to more than 10.000 different parameter settings), far more extensive than any applied research project, no optimal solution could be found, with both high coverage of known topics, low levels of fused topics, and high level of resolved topics. 
+		"Co-occurence is not necessarily meaningful, and any arbitrary cut in the co-occurence graph might not correspond with categorical boundaries."
+		While Lancichinetti et al. (2014) essentially question the simplified intuition often used to describe topic models, as locating sets of co-occuring words (e.g. McFarland et al. 2013:609; Mohr and Boganov 2013:547; Grimmer and Stewart 2013: 17), showing that *unrelated* subclusters can seemlessly share parameters as a result of random initialization (footnote: Problem is because it is a model and not a clustering procedure. Lancichinetti et al. (2014) go on to propose their solution, combining a network clustering approach, to find optimal k and use for initialization. ) an equally relevant cause of error is that of *related* subclusters with overlapping words, but very different meaning. Here the example from Roberts et al (2014) is instructive: by comparing the classifcations of a "Terrorism" topic with human coding of document into the category "Terror", they found that the model also counted 3 documents that "had to do with prices of natural resources, oil in particular, which is often associated with terrorism and the Middle East."(Robert et al. 2014: 1079). Co-occurence can be meaningful, but the specific boundaries set by a model, might not correspond to meaningful categorical boundaries.
+		
+		"One can not just trust the output of the model as meaningful objects in themselves."
+		Because the model produce these types of both related and unrelated artefacts, we can not just trust the output as meaningful objects in themselves, nor make any assumptions about the quality of any given model run. This has consequences both for the use of topic models for discovery and measurement. Firstly, as one of the first introductions to the social sciences conclude: "Topic models must find what we know is there. Ultimately, a topic model’s trustworthiness must be determined by informed human judgments."(Ramage et al. 2009:4). Because interpretability and correspondance with known categories is how we ensure the output is not a meaningless conglemerate. Secondly, interpretation become really hard, because one is not labeling one cluster, but potentially many unrelated subclusters. Thirdly it stresses that the quality of the classification scheme provided by the model is not guarenteed. 
+		Summing up, the problem of "junk" topics is well known and a pervasive problem, even to the novice user filtering the relevant topics from the meaningless ones. In the next section we look at how researchers and practioners handle this issue trying to ensure high quality topics and the validity of their interpretation. 	
+
+	MODEL SELECTION (Use nelson 2017 as the example)
+		"Lanchichetti is ignored. Nelson as Authorive source."
+		Interestlingly the results of Lanchichetti et al. are largely ignored in the field (Footnote: With only 11 citations on google scholar none of which actually mentioning the substance of the article.). A recent methodological piece on: "Computationally Grounded Theory" (Nelson 2017) also giving guidelines about the use of topic modelling, merely note that the algorithm has been criticized (Nelson 2017: 16). As the paper is very recent and direct in its recommendations, we shall use the methodological instructions in the paper to summarize the current state of the art in model selection and validation (Footnote: While the paper mainly focused on topic modelling as a method of discovery, also considering other alternative methods for measurement, it also use topic models for measurement.). 
+		Summing up Nelson (2017) recommendations: 
+		1) As there is no "objective measure" for model selection, one is more or less free to choose a model based on its usefullness related to the researchers substantive interests (Nelson 2017:16). In practice we see researchers narrowing in the space of potential choices with heuristics such as Semantic Coherence and Exclusivity, or assesments of model fit (e.g. for recent examples Chae and Park 2018; Moessner et al. 2018; Korfitias et al. 2019). But ultimately the choice is made with reference to substantive interest or interpretability (e.g. Bohr and Dunlap 2018: 183; Droste et al. 2018:5; Moessner et al. 2018:660;Chae and Park 2018:6). Using quantitative criteria has the important advantage, besides minimizing the number of manual inspections, that the researcher cannot freely choose a solution that give the desired result. 
+		2) Run a few different models altering the number of topics, to locate the prefered level of "granularity". Prefered level refers to perceived quality and usefullness of the solution, using qualitative inspections of word lists. 
+		3) Balance number of Junk topics to Duplicate topics, for choosing right level of granularity. She examplify a junk topic combining car maintenance and sexually transmitted infections in a 20-topic model concluding that it has too few topics (Nelson 2017: 18), and states that "the 50-topic model produced multiple topics on the same issue"(ibid.:18), and finally that the 40-topic "produced topics that were comfortably distinct from one another, yet general enough to be interpretable for my purposes" (ibid.:18). 
+		"Not worried about model instability or error"
+		One notice here the high level of arbitrary choice, and the detection of junk topics using qualitative inspections of highly biased word lists. 
+		She goes on to notice that: "many topics were comparable across all of these four models (e.g., abortion, the Vietnam War, movement history, and legal issues), so I do not anticipate the results to be substantially different if I had chosen a different model" (ibid.:18). 
+		"Multimodality suggest that model choice can have substantial effects."
+		The assumption that model choice will not have substantial effects is very indicative on the level of good faith in the output of topic models. Howewver, recent studies (Chuang et al. 2015; Wilkerson and Casas 2017) of robustess of results to model selection strongly suggest that model choice matter a great deal, and that results based on single models are highly variable. While these studies are rely on automatic allignment using cosine similarity for comparing different topics, our study specifically address the amount of variation introduced by the current practice of labeling, selecting models, and validation. 
+
+	VALIDATION OF TOPIC MODELS
+		"Direct validation of an unsupervised method is not possible."
+		A long held belief within the topic modelling literature is that Unsupervised learning cannot be evaluated directly. This statement make sense under the following conditions:
+		1) Given that we use unsupervised learning for discovery, it should indeed be evaluated in more vague terms for its "usefullness". 
+		2) If we believe that the model output is inherently meaningful (footnote: Rarely do we see this explicated (see Fan et al. 2017 for an example) but it is evident in the focus of cluster quality, independent on any interpretations.), even if we cannot fully translate / interpret it into known categories.
+		The second belief might make sense if we were dealing with an algorithm whose behavior under different empirical conditions were well understood (see appendix for systematic analysis of the behavior under simulated variations in topic proportions and topic overlap), and one which had better guarantees for cluster quality (e.g. see Lanchichettis topic model solution combining a network analytic "parameter-free" solution as a more robust and datadriven initialization of the number of topics and topic assignments.), i.e. low intra-topic distance, and high inter-topic distance. The above segment on topics as conglomerates make it quite clear that this is an unreasonable assumption without validation. 
+		Methods of validating cluster quality has been developed: Cluster quality (Grimmer and King 2011) having humans compare pairs of documents from the same or different unlabeled clusters in terms of relatedness, or word-intrusion test (Chang et al. 2009; Lau et al. 2014) which is considered state-of-the-art (Chuang et al. 2015:3) where it is tested if users can spot the in intruder in a set of topic top words. Indeed the heuristics widely used for narrowing in the model candidates to be chosen from (as recommended by Roberts et al. 2014 and implemented in the STM R-package), tries to automate the evaluation of semantic coherence (Mimno et al. 2011) and exclusivity (Bischof and Airoldi 2012). Two problems remains: 
+		1) The state-of-the-art human evaluation of semantic coherence is almost never used, and instead a quantitative heuristic is used. Furtherore the methods relies on the same biased sampling technique as covered in section x. The state-of-the-art word-intrusion test in itself, is also dependent on top words, i.e. incoherence can exist at the lower levels. The same goes for the two widely used quantitative heuristics (Chi et al. 2018: 2) for evaluating the semantic coherence (footnote: The efficacy of the measure is even validated in relation to predicted the cluster quality assesment made by a human reader of top words.), and exclusivity of a model (Footnote: Top 10 words is the default value for both semantic coherence and exclusivity in the STM package (see https://www.rdocumentation.org/packages/stm/versions/1.3.3/topics/exclusivity)).
+		2) Once a topic has been labeled, e.g. once the researcher claims to measure prevalence of "Terrorism" in a textual database, then the evaluation become straight forward. As stated in the Handbook of Content Analysis (Krippendorf 2004):
+		"A measuring instrument is considered valid if it measures what the user claims it measures."(Krippendorf 2004: 313)
+		If outsourcing the coding process to a computer program he writes that semantic validity is the program's "ability to distinquish between textual units according to how they would be read by ordinary English readers"(Krippendorf 2004: 325)(footnote: This definition disregards, the use of precisily defined and delimited theoretical concepts demanding expert coders.). This is especially true for categories derived from topic models, which ordinarily use common sense labels which are left undefined with a loose heading and a set of top words (examples:"Terrorism: "), as opposed to classic content analysis where clear definitions and delimitations as well as a thoroughly described coding scheme, is both crucial to the intercoder reliability as well as the transparency and theoretical clarity of the argument (Krippendorf 2004; Lasswell 1952). 
+		One problem with this argument remains with assessing the semantic validity of a topic: it assume that human labels are the gold standard. As Krippendorf writes semantic validity is "the complete overlap between a classification of uncertain validity with one we have reasons to trust." (Krippendorf 2004: 325). But who to trust, human annotations, or the model? Many introductions to topic modellig spends a great deal of time on unreliable human coding (most explicitly phrased in DiMaggio 2015:3), which make the controversy difficult to resolve. One could have reason to believe that humans are better at recognizing topicality in a list of words, than from reading a document. But if we describe the task as validly labeling a distribution over words and document probabilities, using a decontektualized list of top words, and that we bear in mind the studies that demonstrate that the cluster quality (not a conglomerate of unrelated distributions i.e. junk) of any given topic can be highly variable, because the model assumptions and hyperparameters are misspecified, and the inference algorithm is multimodal and unstable (i.e. inter-model reliability is low (Chuang et al. 2015)), then we argue that it is more safe to trust human readers.
+		
+		The consequence of this unresolved dispute is that validation in applied work, besides face validity of top words, is either missing, or at most indirect and only applied to a select few of the of measurement devices / topics in the selected model.
+		An often used method for validation is predictive or external validity (Quinn et al 2009; Grimmer and Stewart 2013) and rests on the assumption that: "if topics are valid, then external events should explain sudden increases in attention to a topic"(Grimmer and Stewart 2013: 21). The concept covers the practice of comparing the estimates with expectations by the researcher: e.g. Climate Change topic should be peaking during the kyoto climate conference, or right-wing parties should talk most about Immigration, left-wing should talk most about welfare. In practice it often means annotating, post factum, the largest peaks in a time series - e.g. Grimmer and Stewart (2013:22) annotates the 3 largest peaks in an "Iraq war" topic and 7 out of 9 largest peaks in an "Honorary" topic (footnote: See also DiMaggio et al. 2013 for a more rigorous attempt to pose it as a real prediction problem, however selective the external events chosen are, and the methodology of transforming the hypothesis about topical prevalence between two periods, by making each month in the first period one value, and each month in the second period another, to then perform a regression analysis reporting "high" r2 values that includes control variables, when a simple crosstabulation would be more natural.). While external validity is a good sanity check, it does not ensure precision of the measurement device as we show in our analysis below. 
+		Furthermore it is important to notice that predictive validity is not used in many applied studies - indeed many times the measurement are used to answer question about dynamic attention to a topic (e.g.) - and when done only a few select topics in a model is validated (e.g. DiMaggio 2013; Grimmer 2012).
+
+		Summing up: Although topic models are used as measurement devices, no real assessment of the precision is made. Topics are labeled using a biased sample of either top words or a reweighed version, and top documents. Model selection is done on an ad hoc basis, with many studies refering to some statistical heuristic, narrowing in the model candidates to choose from, but essentially refering to a subjective notion of substantive interests, and preferred level of granularity. Granularity can refer to both, a preferred level of abstraction, that is not too complex with too many too specific topics, and to a heurestic trading of between the need to minimize the number of "junk" topics, as well as the number of duplicates. Validation that the topics actually measure what they claim they measure, is sometimes done using predictive validity, and external criteria, which often amounts to post factum annotation of peaks in a time series. While all of the steps provide some sort of quality control, the efficacy is highly dubious in light of the knowledge about topic instability, and tendency to create conglomerates instead of clusters. To investigate just what consequences this practice can have for the validity of research conclusions and the level of bias in the results, we deviced a method to automate all the above described steps of labelling and validation and applied it to a population of models run on the dataset. This allowed us to find topics which had the same quality according to the validation methods, and in turn test their variance in performance and in the research conclusions to be drawn. Next section we describe our approach in further detail.
+
+
+
+
+
+
+
+		
+		
+
+		Direct validation using a random sample of human annotated.
+
+
+
+		There exists 
+		Somewhat counterintuitively, while 
+
+		One method of validation does 
+
+		Predictive validity. 
+
+
+
+		"Junk is just filtered, only some of the topics are reported"
+		"Only some of the topics are used are validated"
+		
+
+		
+
+		"Junk topics is understood as User perceives top 10."
+		In fact many of the automated methods for model selection is designed to locate topics (e.g. Mimno et al. (2011:1) uses this to motivate their automated model selection aproach, the famous study Chang et al. 2009)
+
+		Ïnterestingly, what the two studies above showed, was not the notion of Junk that practioners use. 
+			"The model assumes that you know the topic proportions (not just number of topics), and when not specified will enforce egalitarian (see formula)"
+			This happens because the model will that one knows the proportions of each  each topic is of equal size (unless the alpha prior is specified precisely for each topic), enforces this with the unbalance in the proportions of the topics (approx ratio 1:20), languages will be joined into a topic conglomerate.  
+    
+
+
+		One can either do it manually as Nelson (2017) proposes, looking at the quality and usefullness of the model by inspecting the top words, if they are interesting/useful and on the right level of granularity, i.e. no or low levels of "Junk" (i.e. joined topics (Farrel 2016 appendix, Nelson 2017)) and no duplicates ("resolved" in Chuangs terminology). Or one can use automated methods to minimize the manual inspections and arbitraryness. Interestingly, one uses the two measures of semantic coherence and exlusivity, which are only calculated on the top words, and is not in that sense representative of the whole topic distribution. 
+
+		
+	....... 
+	Validation
+	Validation attempts:
+		"Researchers only validate a few topics.""
+			The habit of only validating a few topics out of many, even though one good topic is no guarantee for the others. 
+		
+	"Once labeled the topic is no longer just a statistical artefact,  but a substantive category and set of categorizations. These can off course be inspected for their validity."
+		Because the label, transforms what was previously just a statistical artefact, into a substantive category and set of categorizations, it is 	fundamental   What it is very
+	
+	
+	"Researchers are stuck with the idea that unsupervised methods cannot be evaluated directly"
+	Researchers seem to be stuck in the mantra that unsupervised methods cannot be evaluated. 
+	
+	"Why we cannot evaluate unsupervised methods": 
+		- Do not trust human jugdement as ground truth. But we trust human interpretation of topic distributions based on? 
+			It is easier to interpret a list of very topical and indicative words, than more complex semantics of a document. But is it more reliable? I.e. can we make mistakes we let decontextualized words necessarily mean some concept.
+		- Consider the model to be a description of true latent topics, which do not necessarily correspond one to one to any theoretical concept. I.e. we do not exactly know what the topic is, and therefore we can not evaluate it.
+
+	"Unsupervised methods are very hard to validate, but researchers interpretation of the model are not"
+	Researchers continue to hold the position that topic models cannot be evaluated. However
+	Unsupervised methods are very hard to validate, 1. because the researcher do not really know what the topic is. 
+	"Researcher continue to hold that unsupervised methods cannot be validated"
+		
+
+	"Unsupervised methods cannot be validated, but the interpretation of the model can, and the specific classifications can."
+		"Why should the classification of topic models be left unvalidated?"
+		-- We see that it is hard to evaluate an unsupervised method, but it is not hard to evaluate a classification scheme (unless you do not know what it is).
+	"Vague and common sense Categories, versus precise definitions, theoretical delimitations and explicit categorization instructions."
+
+		"Inductive datadriven categories vs precisely delimited theoretical categories"
+
+
+	DATA AND METHODS
+		- Simulation design
+			- Population of Topic Models and Topic Candidates. Simulating the Labelling and validation process, to produce a plausible accepted topic. Analysis of the varying performance and bias introduced by each of the accepted topic classifiers, and the consequences it has for research conclusions and differential bias. 
+		- Corpus preparation.
+		- Building a ground truth for evaluating the topic classifiers.
+			- Trusted source. 
+		- Automatic labeling and validation using validated dictionaries
+			Not all words in a topic output is unambivalent.
+			"An example could be the “Iraq War” topic reported in Grimmer and Stewart (2013: 287): Iraq, iraqi, troop, war, sectarian. Here the key terms Iraq and war have been selected as a label. While war, troop and sectarian are not topical in themselves, but the combination makes sense. I.e. when mathcing terms from a dictionary curated to be unambivalent, to topwords, not all can be expected to match."
+			- Dictionaries built using statistical techniques including top word co-occurence.
+			- Validated labeling process. Highly topical words (Displayed in table X). Topics believed will indeed be accepted as being about this. 
+
+			Number of topic matches, not all are Key terms. "key terms"(denny spirling 2018: 177)
+		- Measuring performance of the topic classifiers
+			--- Non-trivial problem. Previous attempts using random samples and human evaluation.
+			- Precision
+			- Weighted precision
+
+	ANALYSIS (Inefficacy of Validation techniques) : #### Regression design with validitation techniques as input, and Y as error.
+		
+		-- Intrusion as a function of Granularity
+			- Top words and top docs miss junk topics. 
+			----> Convincing ourselves that these are not conglomerates is not efficient.
+
+			"We investigate two assumptions: 
+				1) Noise can be detected with the current methods of model selection and validation: top words, top documents, semantic coherence, predictive validity,
+				2) The misconception that noise is limited to certain topics in a model."
+
+		Predictive Validity
+		-- Bias. 
+			--- As a function of Validation criteria.
+		
+		-- Differential Bias 
+			-- High variance in topic performance
+			-- High variance accross parties, and time.
+			
+			-- Time series correlation and predictive validity.
+		
+		-- Research conclusions.
+			- Sizes of topics. 
+			- Party priorities: Distribution of rankings, or dominant topic.
+			- Relative sizes.
+			- Non-interpretive approach: Oppurtunism analysis.
+		-- Robustness: Stability using multiple model runs. 
+
+	DISCUSSION
+		- Robust approaches using multiple runs and matched topics show some improvement. 
+		- Bias, and differential bias correction !! 
+		- Discovery and other approaches for measurement.
+
+	....
+
+
+
+
+
+
+
+
+
+
+				
+
+
+
+Intros
+Intro 1
+	Central to any scientific endeavor is getting empirical measurements of objects of interest. While the natural sciences often work with very tangible  and clearly defined objects, and thorughly tested and refined measurement devices (Latour) related to each, we as social scientists often work with constantly changing / disputed, or emergent phenomenons, and more ad hoc measurement devices not tested before (e.g. construction of a new survey questions). We rely on general methodologies of enquiring the social world (i.e. constructing measurement devices): how to construct and conduct survey research, how to perform an interview, how to interpret and measure phenomenons in text (Krippendorf 2004). The validity and reliability of each specific measurement device (specific survey question, interview guide and interpretation scheme, categorization scheme and annotation instructions) used in studies is only in some cases taken up for further analysis (refs). In quantitative content analysis it has however become standard practice to evaluate the annotation intruction and annotator performance as tools of measurement using statistical measures of intercoder-reliability. 
+
+Intro 2
+	The goal of classical content analysis of text, is the construction of reliable measurements of phenomenons in text using human annotators as measurement devices (either expert or layperson evaluations). Are non-datadriven patterns right. The field suffers from a fundamental mistrust in human annotation, believed to be unreliable and subjective.  as well as the ungrounded nature 
+
+Intro 3
+	We question the assumptions behind trusting topic models as unvalidtated (or only proviosionally validated) measurement devices. 
+	Inspecting top words, and vague correpondances between predictive validty, while essentially using Granularity level of analysis as the defining argument.
+
+	Why not use Classic Content analysis. 
+
+	No one had really validated any models before Nelson et al. 2018 did it, approx 10 years after it was introduced to the social sciences. 
+
+
+
+Two critiques:
+	- Recognizable topics by domain experts or simply common sense. 
+		--> Then we need to check the performance of the measurement device. Current practice of quality ensurance are not good enough. 
+			-- one does not recognize that junk topics is the normal state of affairs. 
+			-- even though you have only inspected the top 10, the topic is still a probability distribution over the whole vocabulary. 
+			-- due to the fact that priors determine so much of the clustering process. 
+			-- the degree to which something is related by co-occurence and semantically related is not the same.
+			-- Two unrelated subtopics can share parameters (Lancichinetti et al. 2014) and does a lot (Intrusion analysis + subtopic).
+
+	- If one wants truly latent features, essentially unrecognizable, like discourse, "objects in their own right", "Structural description", "the datadriven categorization scheme is better". 
+		--> Then we need to understand if the algorithm actually produce how we theoretically define these latent features. Then we need to be far more specific than saying, topic models finds clusters of words with high co-occurence.
+
+
+Fundamental assumptions
+	- Are the dimensions measured Latent or Objective / Common sensical, and to what degree are they latent? Latent to the point that a human being is unable to recognize it, or latent in the sense that it is the result of a logical exegesis of the text. 
+
+The field of quantative content analysis has become an established genre in sociological research, with 
+
+ When conducting survey research we rely on controversial assumptions about how the survey questions are interpreted, and that the interpretations are not differential accross social groups (Footnote: Furthermore we repurpose and innovate in our interpretation of proxies as Abott (20xx) demonstrated.)
+
+
+That we are constantly develop our conceptual framework to fit the current reality and social world is one of the mantras of Grounded research, demanding that we are open to new phenomenons, that our old conceptions might not fit new contexts of study. 
+
+One of the central parts of any sociological research design is a new measurement. 
+Sociologists study new phenomenons in new contexts in new ways all the time. 
+And the key to many sociological analysis is getting insights on a new phenomenon, essentially. 
+As sociologists start embracing new data sources, our methodologies change. 
+A large part of social science research is done constructing new measurements.  
+As digital traces and Ad-hoc measurement tools. 
+
+Is a good and reliable source of information. 
+
+As work with improving intercoder reliability shows, clear definitions and categorization scheme, it is 
+
+
+
+
+Collection of Points
+
